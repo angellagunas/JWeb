@@ -6,7 +6,17 @@
 
 package Main_Package;
 
+import static Main_Package.Html_Window.TagsCode;
+import static Main_Package.Html_Window.Update;
+import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,16 +24,45 @@ import javax.swing.DefaultListModel;
  */
 public class Main_Window extends javax.swing.JFrame { 
     static DefaultListModel DLM = new DefaultListModel();
+    static Html_Window HtmlWindow = new Html_Window();
+    static  FileWriter Writer ;
 
     /**
      * Creates new form Main_Window
      */
     public Main_Window() {
         initComponents();
+        if(DLM.isEmpty() == true){
         DLM.addElement("Html Main");
         DLM.addElement("Html Body");
+        DLM.addElement("Html Head");
         DLM.addElement("Html Title");
-        DLM.addElement("Html Img");
+        DLM.addElement("Html Img"); 
+        DLM.addElement("Html Pargraph");
+        DLM.addElement("Html Header 1");
+        DLM.addElement("Html Header 2");
+        DLM.addElement("Html Header 3");
+        DLM.addElement("Html Header 4");
+        DLM.addElement("Html Header 5");
+        DLM.addElement("Html Header 6");
+        DLM.addElement("Html Line Break");
+        DLM.addElement("Html Style Link");
+        DLM.addElement("Html Link");
+        DLM.addElement("Html Meta Char");
+        DLM.addElement("Html Meta Keywords");
+        DLM.addElement("Html Meta Description");
+        DLM.addElement("Html Quotes");
+        DLM.addElement("Html Italicize Text");
+        DLM.addElement("Html Bold Text");
+        DLM.addElement("Html Small Text");
+        DLM.addElement("Html Subscripts");
+        DLM.addElement("Html Superscripts");
+       
+       }else{
+            
+            
+        }
+       
     }
 
     /**
@@ -38,7 +77,7 @@ public class Main_Window extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        TagList = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -94,10 +133,10 @@ public class Main_Window extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JWeb");
 
-        jList1.setModel(DLM);
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        jList1.setToolTipText("Html and Css Tags");
-        jScrollPane2.setViewportView(jList1);
+        TagList.setModel(DLM);
+        TagList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        TagList.setToolTipText("Html and Css Tags");
+        jScrollPane2.setViewportView(TagList);
 
         jButton1.setText("Html ");
 
@@ -139,6 +178,11 @@ public class Main_Window extends javax.swing.JFrame {
         Html_Textarea.setLineWrap(true);
         Html_Textarea.setRows(5);
         Html_Textarea.setWrapStyleWord(true);
+        Html_Textarea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Html_TextareaKeyPressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(Html_Textarea);
 
         jTabbedPane1.addTab("Html", jScrollPane4);
@@ -160,9 +204,19 @@ public class Main_Window extends javax.swing.JFrame {
         jMenu1.add(jMenuItem8);
 
         jMenuItem9.setText("Import Html File");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem9);
 
         jMenuItem10.setText("Export Html File");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem10);
 
         jMenuItem4.setText("Load Html Tag");
@@ -186,6 +240,11 @@ public class Main_Window extends javax.swing.JFrame {
         jMenu7.setText("About");
 
         jMenuItem18.setText("JWeb");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem18);
 
         jMenuItem19.setText("Console");
@@ -320,10 +379,105 @@ public class Main_Window extends javax.swing.JFrame {
 
     private void GetTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetTagActionPerformed
         // TODO add your handling code here:
-        Html_Window HtmlWindow = new Html_Window();
-        HtmlWindow.Run();
+       
+        String List =(String) TagList.getSelectedValue();
+        HtmlWindow.Run(List);
+       // if(List.contentEquals("Html Main")){
+          //  HtmlWindow.TagsCode.setText("<html> \n\n\n\n\n\n\n</html>");
+            
+       // }
+        //if(List.contentEquals("Html Body")){
+       // HtmlWindow.TagsCode.setText("<body> \n\n\n\n\n\n\n</body>");
+        
+        
+       // }
+    
+       
+        
     }//GEN-LAST:event_GetTagActionPerformed
 
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        // TODO add your handling code here:
+        //About JWeb
+        AboutJWeb_Window JWeb =new AboutJWeb_Window();
+        JWeb.Run();
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+        //Export
+         String OutPut = Html_Textarea.getText();
+         
+         try {
+              
+              FileChooser Filechooser = new FileChooser();
+              Filechooser.jFileChooser1.showSaveDialog(null);
+              if(Filechooser.jFileChooser1.getSelectedFile().exists()){
+              Filechooser.jFileChooser1.getSelectedFile().delete();
+            
+             }else{
+              Writer = new FileWriter(Filechooser.jFileChooser1.getSelectedFile()+".html");
+              Writer.append(OutPut);
+              Writer.flush();
+              Writer.close();
+              System.out.println("Done");
+             }
+         } catch (IOException ex) {
+             Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
+             
+         }
+         
+       
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        //Import
+        
+        Html_Textarea.setText("");
+   FileChooser Filechooser = new FileChooser();
+              Filechooser.jFileChooser1.showOpenDialog(null);
+              System.out.println(Filechooser.jFileChooser1.getSelectedFile() );
+              if( Filechooser.jFileChooser1.getSelectedFile().isFile()){
+            try {
+                
+                 BufferedReader Reader = new BufferedReader(new FileReader(Filechooser.jFileChooser1.getSelectedFile()));
+                 
+                String line;
+                while((line = Reader.readLine()) !=null){
+                  Html_Textarea.append(line);
+             }
+                Reader.close();
+                
+               
+            } catch (IOException ex) {
+                Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
+                
+            }
+              }else{
+                JOptionPane.showMessageDialog(null, "You Need to Choose a File" );
+               
+              }
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void Html_TextareaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Html_TextareaKeyPressed
+        // TODO add your handling code here:
+          int KeyCode = evt.getKeyCode();
+        if(KeyCode == KeyEvent.VK_ALT){
+            Html_Textarea.setText("");
+          
+            
+        }
+        
+    }//GEN-LAST:event_Html_TextareaKeyPressed
+
+    
+     public  void SetTextHtml(String Text){
+         Html_Textarea.setText(Text);
+            
+            
+        }
+        
     /**
      * @param args the command line arguments
      */
@@ -365,6 +519,7 @@ public class Main_Window extends javax.swing.JFrame {
     private javax.swing.JTextArea ErrorText;
     private javax.swing.JButton GetTag;
     public static javax.swing.JTextArea Html_Textarea;
+    public javax.swing.JList TagList;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -375,7 +530,6 @@ public class Main_Window extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
