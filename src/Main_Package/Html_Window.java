@@ -6,6 +6,7 @@
 
 package Main_Package;
 
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -21,6 +22,7 @@ public class Html_Window extends javax.swing.JFrame {
      * Creates new form Html_Window
      */
     public Html_Window() {
+        Html_Window.super.setIconImage((Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Main_Package/HtmlIcon.png"))));
         initComponents();
     }
 
@@ -53,6 +55,8 @@ public class Html_Window extends javax.swing.JFrame {
         Updata = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        href = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Html Tag Editer");
@@ -91,7 +95,9 @@ public class Html_Window extends javax.swing.JFrame {
         jLabel3.setText("Alt");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("ok");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Ok.png"))); // NOI18N
+        jButton1.setToolTipText("ok");
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -112,8 +118,9 @@ public class Html_Window extends javax.swing.JFrame {
         Width.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         Width.setToolTipText("Also for Imgs and Some other Tag");
 
-        Updata.setText("Update");
+        Updata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/View.png"))); // NOI18N
         Updata.setToolTipText("Updata Both Text area (Final Code and Html Tag)");
+        Updata.setContentAreaFilled(false);
         Updata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UpdataActionPerformed(evt);
@@ -123,6 +130,8 @@ public class Html_Window extends javax.swing.JFrame {
         jLabel7.setText("Final Html Code");
 
         jLabel8.setText("Html Tag");
+
+        jLabel9.setText("href");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,7 +149,7 @@ public class Html_Window extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Updata, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)))
+                            .addComponent(Updata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -155,7 +164,9 @@ public class Html_Window extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Width)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(href))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -189,9 +200,13 @@ public class Html_Window extends javax.swing.JFrame {
                         .addComponent(jLabel5))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(href, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Updata)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -215,13 +230,14 @@ public class Html_Window extends javax.swing.JFrame {
     public static void Update(){
          String MainHtmlText = Main.Html_Textarea.getText();
          //For Html Main ID
+         
         if(Id.getText().length() >1){
-            JOptionPane.showMessageDialog(null, "You will need to add Quotes");
+         //   JOptionPane.showMessageDialog(null, "You will need to add Quotes");
             //All Tags Here: Html main
             //Start Main
             //No need to have any other if Statments Above this one
             if(MainListText.contentEquals("Html Main")){
-               FinalCode.setText("<!--Made with JWeb-->\n<html lang=en id=" +Id.getText()+">\n\n\n\n\n\n\n</html>");
+               FinalCode.setText("<!--Made with JWeb-->\n<html lang=\"en\" id=" + "\"" +Id.getText()+"\">\n\n\n\n\n\n\n</html>");
                
                 
                 
@@ -231,7 +247,7 @@ public class Html_Window extends javax.swing.JFrame {
              if(MainListText.contentEquals("Html Title")){
              FinalCode.setText(MainHtmlText);
              JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
-           TagsCode.setText("<title id=" +Id.getText()+">\n\n\n\n\n\n\n</title>");   
+           TagsCode.setText("<title id=\"" +Id.getText()+"\">\n\n\n\n\n\n\n</title>");   
             
         }////Start Img///////////////////////////////////////////////////////////////////////////////////////////////////////
                    if(MainListText.contentEquals("Html Img")){
@@ -244,7 +260,7 @@ public class Html_Window extends javax.swing.JFrame {
                       JOptionPane.showMessageDialog(null, "You Need to Enter the Alt/Describe the img ");
                      
                  }else{
-                    TagsCode.setText("<img id="+Id.getText()+" " +"scr="+Scr.getText()+" alt="+Alt.getText()+">"); 
+                    TagsCode.setText("<img id=\""+Id.getText()+"\" " +"scr=\""+Scr.getText()+"\" alt=\""+Alt.getText()+"\">"); 
                      JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
                  }
                  
@@ -256,7 +272,7 @@ public class Html_Window extends javax.swing.JFrame {
            if(MainListText.contentEquals("Html Pargraph")){
              FinalCode.setText(MainHtmlText);
              JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
-           TagsCode.setText("<p id=>"+Id.getText()+"\n\n\n\n\n\n\n</p>");   
+           TagsCode.setText("<p id=\">"+Id.getText()+"\"\n\n\n\n\n\n\n</p>");   
             
         } 
            
@@ -266,7 +282,7 @@ public class Html_Window extends javax.swing.JFrame {
            if(MainListText.contentEquals("Html Header 1")){
              FinalCode.setText(MainHtmlText);
             
-           TagsCode.setText("<h1 id=" +Id.getText()+">\n\n\n\n\n\n\n</h1>");
+           TagsCode.setText("<h1 id=\"" +Id.getText()+"\">\n\n\n\n\n\n\n</h1>");
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
             
         }
@@ -275,47 +291,47 @@ public class Html_Window extends javax.swing.JFrame {
             if(MainListText.contentEquals("Html Header 2")){
              FinalCode.setText(MainHtmlText);
              
-           TagsCode.setText("<h2 id=" +Id.getText()+">\n\n\n\n\n\n\n</h1>");
+           TagsCode.setText("<h2 id=\"" +Id.getText()+"\">\n\n\n\n\n\n\n</h1>");
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
             
         }
              if(MainListText.contentEquals("Html Header 3")){
              FinalCode.setText(MainHtmlText);
              
-           TagsCode.setText("<h3 id=" +Id.getText()+">\n\n\n\n\n\n\n</h1>");
+           TagsCode.setText("<h3 id=\"" +Id.getText()+"\">\n\n\n\n\n\n\n</h1>");
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
             
         }
             if(MainListText.contentEquals("Html Header 4")){
              FinalCode.setText(MainHtmlText);
              
-           TagsCode.setText("<h4 id=" +Id.getText()+">\n\n\n\n\n\n\n</h1>");
+           TagsCode.setText("<h4 id=\"" +Id.getText()+"\">\n\n\n\n\n\n\n</h1>");
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
             
         }
              if(MainListText.contentEquals("Html Header 5")){
              FinalCode.setText(MainHtmlText);
             
-           TagsCode.setText("<h5 id=" +Id.getText()+">\n\n\n\n\n\n\n</h5>");
+           TagsCode.setText("<h5 id=\"" +Id.getText()+"\">\n\n\n\n\n\n\n</h5>");
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
             
         }
               if(MainListText.contentEquals("Html Header 6")){
              FinalCode.setText(MainHtmlText);
              
-           TagsCode.setText("<h6 id=" +Id.getText()+">\n\n\n\n\n\n\n</h6>");
+           TagsCode.setText("<h6 id=\"" +Id.getText()+"\">\n\n\n\n\n\n\n</h6>");
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
             
         }
                 if(MainListText.contentEquals("Html Head")){
              FinalCode.setText(MainHtmlText);
              JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
-           TagsCode.setText("<head id="+ Id.getText()+">\n\n\n\n\n\n\n</head>");   
+           TagsCode.setText("<head id=\""+ Id.getText()+"\">\n\n\n\n\n\n\n</head>");   
             
         }
              if(MainListText.contentEquals("Html Link")){
              FinalCode.setText(MainHtmlText);
-            TagsCode.setText("<a id=>"+Id.getText() +  "</a>");
+            TagsCode.setText("<a id=\""+Id.getText() +"\">" +  "</a>");
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
             
         }
@@ -332,19 +348,19 @@ public class Html_Window extends javax.swing.JFrame {
                     
                     //If so then it will get the id and set the text in Tags Code Because their is text with the FinalCode
                     //With ID has text/////////////////////////////////////////////////////////////////////////
-                    TagsCode.setText("<body id=" +Id.getText()+">\n\n\n\n\n\n\n</body>");
+                    TagsCode.setText("<body id=\"" +Id.getText()+"\">\n\n\n\n\n\n\n</body>");
                     JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
                     Id.setText("");
                 }else{
                     //with ID and Set the Text with the FinalCode and Print a Message no Html tag but body tag////////////////////////////////////////
                     if(MainHtmlText.length()==0){
                         JOptionPane.showMessageDialog(null, "You Need the Html Tag before you add a Body so we will set them for you :)");
-                      FinalCode.setText("<!--Made with JWeb-->\n<html lang=en"+">\n\n\n\n\n\n\n</html>");
+                      FinalCode.setText("<!--Made with JWeb-->\n<html lang=\"en\""+">\n\n\n\n\n\n\n</html>");
                       JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
-                      TagsCode.setText("<body id=" +Id.getText()+">\n\n\n\n\n\n\n</body>"); 
+                      TagsCode.setText("<body id=\"" +Id.getText()+"\">\n\n\n\n\n\n\n</body>"); 
                         Id.setText("");
                     }else{
-                         TagsCode.setText("<body id=" +Id.getText()+">\n\n\n\n\n\n\n</body>");
+                         TagsCode.setText("<body id=\"" +Id.getText()+"\">\n\n\n\n\n\n\n</body>");
                         Id.setText("");
                     }
                    
@@ -383,7 +399,7 @@ public class Html_Window extends javax.swing.JFrame {
       //Start Html No Id
            
         if(MainListText.contentEquals("Html Main")){
-           FinalCode.setText("<!--Made with JWeb-->\n<html lang=en"+">\n\n\n\n\n\n\n</html>");   
+           FinalCode.setText("<!--Made with JWeb-->\n<html lang=\"en\""+">\n\n\n\n\n\n\n</html>");   
             
         }
         
@@ -463,11 +479,11 @@ public class Html_Window extends javax.swing.JFrame {
         } 
          if(MainListText.contentEquals("Html Style Link")){
              FinalCode.setText(MainHtmlText);
-             if(Scr.getText().length() == 0){
-             JOptionPane.showMessageDialog(null,"You need to enter Text in the Scr Box");    
+             if(href.getText().length() == 0){
+             JOptionPane.showMessageDialog(null,"You need to enter a File loaction to the Css File in the Text Box");    
                  
              }else{
-                 TagsCode.setText("<style type=/text/css scr= "+Scr.getText() +"/>");
+                 TagsCode.setText("<link rel=\"stylesheet\" href=\""+href.getText() +"\"/>");
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
              }
         }
@@ -479,7 +495,7 @@ public class Html_Window extends javax.swing.JFrame {
         }
           if(MainListText.contentEquals("Html Meta Char")){
              FinalCode.setText(MainHtmlText);
-            TagsCode.setText("<meta charset-UTF-8/>");
+            TagsCode.setText("<meta charset\"-UTF-8/\">");
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
             
         }
@@ -491,13 +507,13 @@ public class Html_Window extends javax.swing.JFrame {
         }
                if(MainListText.contentEquals("Html Meta Keywords")){
              FinalCode.setText(MainHtmlText);
-            TagsCode.setText("<meta name=keywords content enter keywords here >");
+            TagsCode.setText("<meta name=\"keywords\" content\"enter keywords here\" >");
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
             
         }
-            if(MainListText.contentEquals("Html Meta description")){
+            if(MainListText.contentEquals("Html Meta Description")){
              FinalCode.setText(MainHtmlText);
-            TagsCode.setText("<meta name=description content enter description here>");
+            TagsCode.setText("<meta name=\"description\" content\"enter description here\">");
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
             
         }
@@ -537,6 +553,21 @@ public class Html_Window extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
             
         }
+            if(MainListText.contentEquals("Html Doctype")){
+             FinalCode.setText(MainHtmlText);
+            TagsCode.setText("<!doctype html>");
+           JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
+            
+        }
+            
+               if(MainListText.contentEquals("Html Center")){
+             FinalCode.setText(MainHtmlText);
+            TagsCode.setText("<center>\n\n\n\n\n\n\n</center>");
+           JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
+            
+        }
+        
+        
         
         
          
@@ -553,7 +584,7 @@ public class Html_Window extends javax.swing.JFrame {
                       JOptionPane.showMessageDialog(null, "You Need to Enter the Alt/Describe the img ");
                      
                  }else{
-                    TagsCode.setText("<img scr="+Scr.getText()+""+Alt.getText()+">"); 
+                    TagsCode.setText("<img scr=\""+Scr.getText()+"\" alt=\""+Alt.getText()+"\">"); 
                      JOptionPane.showMessageDialog(null,"We will let you choose the loaction of where the tag will be");
                  }
                  
@@ -656,6 +687,7 @@ public class Html_Window extends javax.swing.JFrame {
     private static javax.swing.JTextField Title;
     private javax.swing.JButton Updata;
     private static javax.swing.JTextField Width;
+    private static javax.swing.JTextField href;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -665,6 +697,7 @@ public class Html_Window extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
