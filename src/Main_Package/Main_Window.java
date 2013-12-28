@@ -26,16 +26,21 @@ import javax.swing.JOptionPane;
 public class Main_Window extends javax.swing.JFrame { 
     static DefaultListModel DLM = new DefaultListModel();
     static Html_Window HtmlWindow = new Html_Window();
+    static Css_Window CssWindow = new Css_Window();
     static  FileWriter Writer ;
+    static Console_Window ConsoleWindow = new Console_Window();
 
     /**
      * Creates new form Main_Window
      */
+   
     public Main_Window() {
-        initComponents();
+         initComponents();
         Main_Window.super.setIconImage((Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Main_Package/JWeb.png"))));
         if(DLM.isEmpty() == true){
         DLM.addElement("Html Main");
+        DLM.addElement("Html Doctype");
+        DLM.addElement("Html Center");
         DLM.addElement("Html Body");
         DLM.addElement("Html Head");
         DLM.addElement("Html Title");
@@ -84,12 +89,12 @@ public class Main_Window extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        HtmlMain = new javax.swing.JButton();
+        HtmlHeader = new javax.swing.JButton();
+        HtmlVoid = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         GetTag = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        HtmlVideo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         ErrorText = new javax.swing.JTextArea();
@@ -103,12 +108,12 @@ public class Main_Window extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        Save = new javax.swing.JMenuItem();
+        Load = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        Exit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
@@ -125,7 +130,7 @@ public class Main_Window extends javax.swing.JFrame {
         Metal = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        Console = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
@@ -136,37 +141,66 @@ public class Main_Window extends javax.swing.JFrame {
         jMenu8.setText("jMenu8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("JWeb");
+        setTitle("JWeb IDE 1.0");
 
         TagList.setModel(DLM);
-        TagList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         TagList.setToolTipText("Html and Css Tags");
         jScrollPane2.setViewportView(TagList);
 
-        jButton1.setText("Html");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/6.png"))); // NOI18N
+        jButton1.setToolTipText("Shows only the Html Tags");
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Css");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Css3.png"))); // NOI18N
+        jButton2.setToolTipText("Shows only the Css tags");
+        jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("All");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/JavaWindow.png"))); // NOI18N
+        jButton3.setToolTipText("Shows all tags");
+        jButton3.setContentAreaFilled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Html Main");
+        HtmlMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Html File.png"))); // NOI18N
+        HtmlMain.setToolTipText("Shows only most Common used Tags");
+        HtmlMain.setContentAreaFilled(false);
 
-        jButton5.setText("Html Header");
+        HtmlHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/HtmlFile1.png"))); // NOI18N
+        HtmlHeader.setToolTipText("Shows tags like the Header Tags");
+        HtmlHeader.setContentAreaFilled(false);
 
-        jButton6.setText("Html Void");
+        HtmlVoid.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/4.png"))); // NOI18N
+        HtmlVoid.setToolTipText("Shows the Void Html Tags");
+        HtmlVoid.setContentAreaFilled(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/HtmlIcon.png"))); // NOI18N
         jLabel1.setText("  Choose Tag");
 
-        GetTag.setText("Set Selceted");
+        GetTag.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/3.png"))); // NOI18N
+        GetTag.setToolTipText("Open Html or Css Tags Editer based of what the user Selected");
+        GetTag.setContentAreaFilled(false);
         GetTag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GetTagActionPerformed(evt);
             }
         });
 
-        jButton8.setText("Html Video");
-        jButton8.setToolTipText("Video and Sound Tags for Html");
+        HtmlVideo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/9.png"))); // NOI18N
+        HtmlVideo.setToolTipText("Video and Sound Tags for Html");
+        HtmlVideo.setContentAreaFilled(false);
 
         jLabel2.setText("Tag Orders");
 
@@ -178,12 +212,19 @@ public class Main_Window extends javax.swing.JFrame {
 
         jLabel3.setText("Html Code Errors");
 
-        ErrorButton.setText("Check for Errors");
+        ErrorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Cut.png"))); // NOI18N
+        ErrorButton.setToolTipText("Checks for Errors ");
+        ErrorButton.setContentAreaFilled(false);
 
         Html_Textarea.setColumns(20);
         Html_Textarea.setLineWrap(true);
         Html_Textarea.setRows(5);
         Html_Textarea.setWrapStyleWord(true);
+        Html_Textarea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Html_TextareaMouseClicked(evt);
+            }
+        });
         Html_Textarea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Html_TextareaKeyPressed(evt);
@@ -208,14 +249,26 @@ public class Main_Window extends javax.swing.JFrame {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Html File.png"))); // NOI18N
         jMenu1.setText("File");
 
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/SaveFile.png"))); // NOI18N
-        jMenuItem7.setText("Save");
-        jMenu1.add(jMenuItem7);
+        Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/SaveFile.png"))); // NOI18N
+        Save.setText("Save");
+        Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Save);
 
-        jMenuItem8.setText("Load");
-        jMenu1.add(jMenuItem8);
+        Load.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/NewWindow.png"))); // NOI18N
+        Load.setText("Load");
+        Load.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Load);
 
-        jMenuItem9.setText("Import Html File");
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/2.png"))); // NOI18N
+        jMenuItem9.setText("Import Html File or Css File");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -223,7 +276,8 @@ public class Main_Window extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem9);
 
-        jMenuItem10.setText("Export Html File");
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/1.png"))); // NOI18N
+        jMenuItem10.setText("Export Html File and Css File");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);
@@ -231,20 +285,29 @@ public class Main_Window extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem10);
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/4.png"))); // NOI18N
         jMenuItem4.setText("Load Html Tag");
         jMenu1.add(jMenuItem4);
 
-        jMenuItem6.setText("Exit");
-        jMenu1.add(jMenuItem6);
+        Exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/ExitButton.png"))); // NOI18N
+        Exit.setText("Exit");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Exit);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Edit.png"))); // NOI18N
         jMenu2.setText("Edit");
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/8.png"))); // NOI18N
         jMenuItem3.setText("Edit Html tag");
         jMenu2.add(jMenuItem3);
 
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/3.png"))); // NOI18N
         jMenuItem12.setText("Edit Css tag");
         jMenu2.add(jMenuItem12);
 
@@ -262,6 +325,7 @@ public class Main_Window extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem18);
 
+        jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/10.png"))); // NOI18N
         jMenuItem19.setText("Console");
         jMenu7.add(jMenuItem19);
 
@@ -276,9 +340,10 @@ public class Main_Window extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Css.png"))); // NOI18N
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Css3.png"))); // NOI18N
         jMenu4.setText("Css");
 
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Css.png"))); // NOI18N
         jMenuItem11.setText("New Css tag");
         jMenu4.add(jMenuItem11);
 
@@ -296,6 +361,7 @@ public class Main_Window extends javax.swing.JFrame {
         });
         jMenu5.add(Windows);
 
+        Nimbus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/JavaWindow.png"))); // NOI18N
         Nimbus.setText("Nimbus");
         Nimbus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -304,6 +370,7 @@ public class Main_Window extends javax.swing.JFrame {
         });
         jMenu5.add(Nimbus);
 
+        Metal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Window.png"))); // NOI18N
         Metal.setText("Metal");
         Metal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,6 +379,7 @@ public class Main_Window extends javax.swing.JFrame {
         });
         jMenu5.add(Metal);
 
+        jMenuItem20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/7.png"))); // NOI18N
         jMenuItem20.setText("Color Chooser");
         jMenu5.add(jMenuItem20);
 
@@ -320,20 +388,29 @@ public class Main_Window extends javax.swing.JFrame {
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Console.png"))); // NOI18N
         jMenu6.setText("Developers");
 
-        jMenuItem5.setText("Console");
-        jMenu6.add(jMenuItem5);
+        Console.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/10.png"))); // NOI18N
+        Console.setText("Console");
+        Console.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsoleActionPerformed(evt);
+            }
+        });
+        jMenu6.add(Console);
 
         jMenuBar1.add(jMenu6);
 
         jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Help.png"))); // NOI18N
         jMenu9.setText("Help");
 
+        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Css3.png"))); // NOI18N
         jMenuItem15.setText("Css");
         jMenu9.add(jMenuItem15);
 
+        jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/HtmlIcon.png"))); // NOI18N
         jMenuItem16.setText("Html");
         jMenu9.add(jMenuItem16);
 
+        jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/JWebIcon.png"))); // NOI18N
         jMenuItem17.setText("JWeb");
         jMenu9.add(jMenuItem17);
 
@@ -345,77 +422,77 @@ public class Main_Window extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(GetTag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ErrorButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(jScrollPane3))
-                .addContainerGap())
+                                    .addComponent(ErrorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(HtmlMain, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(HtmlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(HtmlVoid, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(HtmlVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(GetTag, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel5))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 21, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(GetTag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(63, 63, 63)
-                        .addComponent(ErrorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(GetTag)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(HtmlMain, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(HtmlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(HtmlVoid, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(HtmlVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(85, 85, 85)
+                                .addComponent(ErrorButton)
+                                .addGap(11, 11, 11))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -425,7 +502,24 @@ public class Main_Window extends javax.swing.JFrame {
         // TODO add your handling code here:
        
         String List =(String) TagList.getSelectedValue();
-        HtmlWindow.Run(List);
+        //int[] ListAll = TagList.getSelectedIndices();
+        if(List.length() < 1){
+            JOptionPane.showMessageDialog(null,"You Need to Choose a Tag");
+            
+        }else{
+            if(List.contains("Html") ==  true){
+                 HtmlWindow.Run(List); 
+                
+            }else{
+                //Run Css Window.
+                CssWindow.Run(List);
+                
+                
+            }
+         
+            
+        }
+        
        // if(List.contentEquals("Html Main")){
           //  HtmlWindow.TagsCode.setText("<html> \n\n\n\n\n\n\n</html>");
             
@@ -451,6 +545,7 @@ public class Main_Window extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Export
          String OutPut = Html_Textarea.getText();
+         String OutPutCss = Css_Textarea.getText();
          
          try {
               
@@ -462,6 +557,10 @@ public class Main_Window extends javax.swing.JFrame {
              }else{
               Writer = new FileWriter(Filechooser.jFileChooser1.getSelectedFile()+".html");
               Writer.append(OutPut);
+              Writer.flush();
+              Writer.close();
+              Writer = new FileWriter(Filechooser.jFileChooser1.getSelectedFile()+".css");
+              Writer.append(OutPutCss);
               Writer.flush();
               Writer.close();
               System.out.println("Done");
@@ -477,19 +576,31 @@ public class Main_Window extends javax.swing.JFrame {
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
         //Import
-        
-        Html_Textarea.setText("");
-   FileChooser Filechooser = new FileChooser();
+         FileChooser Filechooser = new FileChooser();
               Filechooser.jFileChooser1.showOpenDialog(null);
               System.out.println(Filechooser.jFileChooser1.getSelectedFile() );
+               if( Html_Textarea.getText().length() <1){
+                     Html_Textarea.setText("");
+                 }
+               if( Css_Textarea.getText().length() <1){
+                     Html_Textarea.setText("");
+                 }
               if( Filechooser.jFileChooser1.getSelectedFile().isFile()){
             try {
                 
                  BufferedReader Reader = new BufferedReader(new FileReader(Filechooser.jFileChooser1.getSelectedFile()));
-                 
+                
                 String line;
                 while((line = Reader.readLine()) !=null){
-                  Html_Textarea.append(line);
+                    if(Filechooser.jFileChooser1.getSelectedFile().toString().contains(".css")){
+                       Css_Textarea.append(line);
+                        
+                    }else{
+                   if(Filechooser.jFileChooser1.getSelectedFile().toString().contains(".html"))
+                       System.out.println("In Html: "+ line);
+                         Html_Textarea.append(line);
+                    }
+                 
              }
                 Reader.close();
                 
@@ -597,12 +708,184 @@ public class Main_Window extends javax.swing.JFrame {
         
     }//GEN-LAST:event_MetalActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        DLM.removeAllElements();
+        DLM.addElement("Css Font");
+        DLM.addElement("Css Text size");
+        DLM.addElement("Css Color");
+        DLM.addElement("Css Backround Img");
+        DLM.addElement("Css Backround Color");
+        DLM.addElement("Css Backround Box Model");
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DLM.removeAllElements();
+        DLM.addElement("Html Main");
+        DLM.addElement("Html Doctype");
+        DLM.addElement("Html Center");
+        DLM.addElement("Html Body");
+        DLM.addElement("Html Head");
+        DLM.addElement("Html Title");
+        DLM.addElement("Html Img"); 
+        DLM.addElement("Html Pargraph");
+        DLM.addElement("Html Header 1");
+        DLM.addElement("Html Header 2");
+        DLM.addElement("Html Header 3");
+        DLM.addElement("Html Header 4");
+        DLM.addElement("Html Header 5");
+        DLM.addElement("Html Header 6");
+        DLM.addElement("Html Line Break");
+        DLM.addElement("Html Style Link");
+        DLM.addElement("Html Link");
+        DLM.addElement("Html Meta Char");
+        DLM.addElement("Html Meta Keywords");
+        DLM.addElement("Html Meta Description");
+        DLM.addElement("Html Quotes");
+        DLM.addElement("Html Italicize Text");
+        DLM.addElement("Html Bold Text");
+        DLM.addElement("Html Small Text");
+        DLM.addElement("Html Subscripts");
+        DLM.addElement("Html Superscripts");
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        DLM.removeAllElements();
+        DLM.addElement("Html Main");
+        DLM.addElement("Html Doctype");
+        DLM.addElement("Html Center");
+        DLM.addElement("Html Body");
+        DLM.addElement("Html Head");
+        DLM.addElement("Html Title");
+        DLM.addElement("Html Img"); 
+        DLM.addElement("Html Pargraph");
+        DLM.addElement("Html Header 1");
+        DLM.addElement("Html Header 2");
+        DLM.addElement("Html Header 3");
+        DLM.addElement("Html Header 4");
+        DLM.addElement("Html Header 5");
+        DLM.addElement("Html Header 6");
+        DLM.addElement("Html Line Break");
+        DLM.addElement("Html Style Link");
+        DLM.addElement("Html Link");
+        DLM.addElement("Html Meta Char");
+        DLM.addElement("Html Meta Keywords");
+        DLM.addElement("Html Meta Description");
+        DLM.addElement("Html Quotes");
+        DLM.addElement("Html Italicize Text");
+        DLM.addElement("Html Bold Text");
+        DLM.addElement("Html Small Text");
+        DLM.addElement("Html Subscripts");
+        DLM.addElement("Html Superscripts");
+        DLM.addElement("Css Font");
+        DLM.addElement("Css Text size");
+        DLM.addElement("Css Color");
+        DLM.addElement("Css Backround Img");
+        DLM.addElement("Css Backround Color");
+        DLM.addElement("Css Backround Box Model");
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void Html_TextareaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Html_TextareaMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_Html_TextareaMouseClicked
+
+    private void ConsoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsoleActionPerformed
+        // TODO add your handling code here:
+        ConsoleWindow.Run();
+       
+    }//GEN-LAST:event_ConsoleActionPerformed
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        // TODO add your handling code here:
+        System.exit(1);
+    }//GEN-LAST:event_ExitActionPerformed
+
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+        // TODO add your handling code here:
+         String OutPut = Html_Textarea.getText();
+         String OutPutCss = Css_Textarea.getText();
+         try {
+              
+              FileChooser Filechooser = new FileChooser();
+              Filechooser.jFileChooser1.showSaveDialog(null);
+              if(Filechooser.jFileChooser1.getSelectedFile().exists()){
+              Filechooser.jFileChooser1.getSelectedFile().delete();
+            
+             }else{
+              Writer = new FileWriter(Filechooser.jFileChooser1.getSelectedFile()+".JWebProjectHtml");
+              Writer.append(OutPut);
+              Writer.flush();
+              Writer.close();
+              Writer = new FileWriter(Filechooser.jFileChooser1.getSelectedFile()+".JWebProjectCss");
+              Writer.append(OutPutCss);
+              Writer.flush();
+              Writer.close();
+              System.out.println("Done");
+             }
+         } catch (IOException ex) {
+             Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
+             
+         }
+        
+        
+        
+    }//GEN-LAST:event_SaveActionPerformed
+
+    private void LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadActionPerformed
+        // TODO add your handling code here:
+          Html_Textarea.setText("");
+   FileChooser Filechooser = new FileChooser();
+              Filechooser.jFileChooser1.showOpenDialog(null);
+              System.out.println(Filechooser.jFileChooser1.getSelectedFile() );
+              if( Filechooser.jFileChooser1.getSelectedFile().isFile()){
+            try {
+                
+                 BufferedReader Reader = new BufferedReader(new FileReader(Filechooser.jFileChooser1.getSelectedFile()));
+                 
+                String line;
+                while((line = Reader.readLine()) !=null){
+                  if(Filechooser.jFileChooser1.getSelectedFile().toString().contains(".JWebProjectCss")){
+                       Css_Textarea.append(line);
+                        
+                    }else{
+                   if(Filechooser.jFileChooser1.getSelectedFile().toString().contains(".JWebProjectHtml"))
+                       System.out.println("In Html: "+ line);
+                         Html_Textarea.append(line);
+                    }
+             }
+                Reader.close();
+                
+               
+            } catch (IOException ex) {
+                Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
+                
+            }
+              }else{
+                JOptionPane.showMessageDialog(null, "You Need to Choose a File" );
+               
+              }
+    }//GEN-LAST:event_LoadActionPerformed
+
     
      public  void SetTextHtml(String Text){
          Html_Textarea.setText(Text);
             
             
         }
+     public void SetTextCss(String Text){
+         Css_Textarea.setText(Text);
+         
+     }
         
     /**
      * @param args the command line arguments
@@ -640,22 +923,26 @@ public class Main_Window extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Console;
     public static javax.swing.JTextArea Css_Textarea;
     private javax.swing.JButton ErrorButton;
     private javax.swing.JTextArea ErrorText;
+    private javax.swing.JMenuItem Exit;
     private javax.swing.JButton GetTag;
+    private javax.swing.JButton HtmlHeader;
+    private javax.swing.JButton HtmlMain;
+    private javax.swing.JButton HtmlVideo;
+    private javax.swing.JButton HtmlVoid;
     public static javax.swing.JTextArea Html_Textarea;
+    private javax.swing.JMenuItem Load;
     private javax.swing.JMenuItem Metal;
     private javax.swing.JMenuItem Nimbus;
+    private javax.swing.JMenuItem Save;
     public javax.swing.JList TagList;
     private javax.swing.JMenuItem Windows;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -683,10 +970,6 @@ public class Main_Window extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
