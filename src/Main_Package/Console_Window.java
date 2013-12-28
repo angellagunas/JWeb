@@ -6,6 +6,9 @@
 
 package Main_Package;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author Trevor
@@ -18,6 +21,34 @@ public class Console_Window extends javax.swing.JFrame {
     public Console_Window() {
         initComponents();
     }
+    public static void Run(){
+        new Console_Window().setVisible(true);
+        
+        
+    }
+    public static void PrintTOConsole(String Text){
+        Calendar Cal = new GregorianCalendar();
+        int one =1;
+        int Month = Cal.get(Calendar.MONTH);
+        int Year = Cal.get(Calendar.YEAR);
+        int Day = Cal.get(Calendar.DAY_OF_MONTH);
+        int Time = Cal.get(Calendar.MINUTE);
+        int Hour = Cal.get(Calendar.HOUR);
+        int mill =Cal.get(Calendar.MILLISECOND);
+        if(Console.getText().length() == 0){
+             Console.append(Month+ 1+"/"+Day+"/"+Year+","+Hour+":"+Time+":"+mill+" "+Text);
+            
+        }else{
+            String Space ="\n";
+             int Month2 = Cal.get(Calendar.MONTH);
+             Console.append("\n");
+        Console.append(Month2+ 1+"/"+Day+"/"+Year+","+Hour+":"+Time+":"+mill+" "+Text);
+        
+        
+        }
+    }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,7 +67,8 @@ public class Console_Window extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Console");
 
         Console.setColumns(20);
         Console.setRows(5);
@@ -113,7 +145,7 @@ public class Console_Window extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CMD;
-    private javax.swing.JTextArea Console;
+    private static javax.swing.JTextArea Console;
     private javax.swing.JButton Enter;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
