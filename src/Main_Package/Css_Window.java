@@ -196,7 +196,9 @@ public class Css_Window extends javax.swing.JFrame {
         setTitle("Css Tag Editer");
 
         Final_Code.setColumns(20);
+        Final_Code.setLineWrap(true);
         Final_Code.setRows(5);
+        Final_Code.setWrapStyleWord(true);
         jScrollPane1.setViewportView(Final_Code);
 
         Tag_Code.setColumns(20);

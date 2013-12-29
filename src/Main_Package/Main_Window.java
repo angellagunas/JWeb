@@ -8,6 +8,8 @@ package Main_Package;
 
 import static Main_Package.Html_Window.TagsCode;
 import static Main_Package.Html_Window.Update;
+import java.awt.Color;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
@@ -18,6 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Highlighter;
 
 /**
  *
@@ -29,6 +33,8 @@ public class Main_Window extends javax.swing.JFrame {
     static Css_Window CssWindow = new Css_Window();
     static  FileWriter Writer ;
     static Console_Window ConsoleWindow = new Console_Window();
+    
+   
 
     /**
      * Creates new form Main_Window
@@ -84,6 +90,7 @@ public class Main_Window extends javax.swing.JFrame {
 
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
+        TestPopUp = new javax.swing.JPopupMenu();
         jScrollPane2 = new javax.swing.JScrollPane();
         TagList = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
@@ -122,8 +129,12 @@ public class Main_Window extends javax.swing.JFrame {
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        WebsiteGen = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        ImgLoader = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         Windows = new javax.swing.JMenuItem();
         Nimbus = new javax.swing.JMenuItem();
@@ -215,6 +226,11 @@ public class Main_Window extends javax.swing.JFrame {
         ErrorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Cut.png"))); // NOI18N
         ErrorButton.setToolTipText("Checks for Errors ");
         ErrorButton.setContentAreaFilled(false);
+        ErrorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ErrorButtonActionPerformed(evt);
+            }
+        });
 
         Html_Textarea.setColumns(20);
         Html_Textarea.setLineWrap(true);
@@ -223,6 +239,12 @@ public class Main_Window extends javax.swing.JFrame {
         Html_Textarea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Html_TextareaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Html_TextareaMouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Html_TextareaMousePressed(evt);
             }
         });
         Html_Textarea.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -338,6 +360,23 @@ public class Main_Window extends javax.swing.JFrame {
         jMenuItem1.setText("New Tag");
         jMenu3.add(jMenuItem1);
 
+        WebsiteGen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Help.png"))); // NOI18N
+        WebsiteGen.setText("Options");
+        jMenu3.add(WebsiteGen);
+
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/New Html.png"))); // NOI18N
+        jMenuItem5.setText("Website Generator");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
+
+        ImgLoader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/2.png"))); // NOI18N
+        ImgLoader.setText("Img Loader");
+        jMenu3.add(ImgLoader);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Css3.png"))); // NOI18N
@@ -346,6 +385,9 @@ public class Main_Window extends javax.swing.JFrame {
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main_Package/Css.png"))); // NOI18N
         jMenuItem11.setText("New Css tag");
         jMenu4.add(jMenuItem11);
+
+        jMenuItem8.setText("Options");
+        jMenu4.add(jMenuItem8);
 
         jMenuBar1.add(jMenu4);
 
@@ -423,7 +465,7 @@ public class Main_Window extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -545,7 +587,7 @@ public class Main_Window extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Export
          String OutPut = Html_Textarea.getText();
-         String OutPutCss = Css_Textarea.getText();
+        String OutPutCss = Css_Textarea.getText();
          
          try {
               
@@ -620,6 +662,55 @@ public class Main_Window extends javax.swing.JFrame {
           int KeyCode = evt.getKeyCode();
         if(KeyCode == KeyEvent.VK_ALT){
             Html_Textarea.setText("");
+          
+            
+        }
+         if(KeyCode == KeyEvent.VK_F1){
+             HtmlQuickAdd_Window Html = new HtmlQuickAdd_Window(); 
+             System.out.append("Trying to Print to the Text area ");
+         Html.Run();
+            
+        }
+        
+        
+        if(KeyCode == KeyEvent.VK_CONTROL){
+            String text = Html_Textarea.getSelectedText();
+           String HtmlEx ="<html></html>";
+        String BodyEx = "<body></body>";
+        String HeadEx = "<head></head>";
+        ErrorText.append(text);
+        //Over all Check///Start
+        if(Html_Textarea.getText().contains("<html></html>")){
+            ErrorText.append("Html WorkSpace has Html Tags! now Checking for body tags");
+        }else{
+             ErrorText.append("Ever WebSite needs a Html tag to start out with add one with the Html tag editer");
+            
+        }
+        if(Html_Textarea.getText().contains("<body></body>")){
+           ErrorText.append("Has Body Tags");
+        }else{
+            ErrorText.append("All Good Website have a body add one with the tag editer");
+            
+        }
+        if(Html_Textarea.getText().contains("<head></head>")){
+           ErrorText.append("Has Body Tags");
+        }else{
+            ErrorText.append("You need a head add one with the tag editer");
+            
+        }
+        
+        
+        
+        
+       if(text.contains(HtmlEx)){
+           System.out.println(text);
+           ErrorText.append(text);
+           
+       }
+        
+          
+            
+         
           
             
         }
@@ -796,6 +887,9 @@ public class Main_Window extends javax.swing.JFrame {
 
     private void Html_TextareaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Html_TextareaMouseClicked
         // TODO add your handling code here:
+     
+       
+        
         
     }//GEN-LAST:event_Html_TextareaMouseClicked
 
@@ -876,14 +970,58 @@ public class Main_Window extends javax.swing.JFrame {
               }
     }//GEN-LAST:event_LoadActionPerformed
 
+    private void ErrorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ErrorButtonActionPerformed
+        // TODO add your handling code here:
+        String Text = Html_Textarea.getText();
+        String SelText = Html_Textarea.getSelectedText().trim();
+        String HtmlEx ="<html></html>";
+        String BodyEx = "<body></body>";
+        String HeadEx = "<head></head>";
+       if(SelText.contains(HtmlEx)){
+           System.out.println(SelText);
+           
+       }
+        
+    }//GEN-LAST:event_ErrorButtonActionPerformed
+
+    private void Html_TextareaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Html_TextareaMouseEntered
+        // TODO add your handling code here:
+     //When it enters the textarea
+    }//GEN-LAST:event_Html_TextareaMouseEntered
+
+    private void Html_TextareaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Html_TextareaMousePressed
+        // TODO add your handling code here:
+        if(evt.isAltDown() == true){
+            
+            
+        }else{
+            //? Coming soon
+            
+        }
+        
+        
+    }//GEN-LAST:event_Html_TextareaMousePressed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        WebSiteGen_Window Gen = new WebSiteGen_Window();
+        Gen.Run();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     
      public  void SetTextHtml(String Text){
          Html_Textarea.setText(Text);
+        
             
             
         }
      public void SetTextCss(String Text){
          Css_Textarea.setText(Text);
+         
+     }
+     public void SetTextHtmlGen(String Text){
+       Html_Textarea.setText(Text);
+      Html_Textarea.setText(Html_Textarea.getText());
          
      }
         
@@ -934,11 +1072,14 @@ public class Main_Window extends javax.swing.JFrame {
     private javax.swing.JButton HtmlVideo;
     private javax.swing.JButton HtmlVoid;
     public static javax.swing.JTextArea Html_Textarea;
+    private javax.swing.JMenuItem ImgLoader;
     private javax.swing.JMenuItem Load;
     private javax.swing.JMenuItem Metal;
     private javax.swing.JMenuItem Nimbus;
     private javax.swing.JMenuItem Save;
     public javax.swing.JList TagList;
+    private javax.swing.JPopupMenu TestPopUp;
+    private javax.swing.JMenuItem WebsiteGen;
     private javax.swing.JMenuItem Windows;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -970,11 +1111,13 @@ public class Main_Window extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private static javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
